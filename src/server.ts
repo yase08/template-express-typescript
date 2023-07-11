@@ -10,8 +10,8 @@ import http, { Server } from "http";
 import consola from "consola";
 import nocache from "nocache";
 import SlowDown from "express-slow-down";
-import db from "./db/models";
 import hpp from "hpp";
+import session from "express-session";
 import { swaggerClient, swaggerServe } from "./libs/swagger.libs";
 import AuthRoutes from "./routes/auth.route";
 
@@ -43,6 +43,14 @@ export class App {
     if (!["production", "test"].includes(this.env)) {
       this.app.use(`${this.version}/docs`, swaggerServe, swaggerClient());
     }
+    this.app.use(
+      session({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.SESSION_SECRET_KEY as string,
+        cookie: { httpOnly: true, sameSite: "strict" },
+      })
+    );
     this.app.use(
       cors({
         origin: "*",
