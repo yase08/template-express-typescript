@@ -23,7 +23,6 @@ export class AuthService {
       const hashedPassword = await hashPassword(req.body.password);
 
       const createUser = await db.user.create({
-        username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
       });
@@ -54,7 +53,7 @@ export class AuthService {
 
       const hashedPassword = await comparePassword(
         user.password,
-        req.body.password,
+        req.body.password
       );
 
       if (!hashedPassword)
@@ -67,7 +66,7 @@ export class AuthService {
       );
 
       return Promise.resolve(
-        apiResponse(status.OK, "Login Success", token, undefined)
+        apiResponse(status.OK, "Login success", token, undefined)
       );
     } catch (error: any) {
       return Promise.reject(

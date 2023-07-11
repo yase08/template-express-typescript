@@ -10,6 +10,7 @@ import http, { Server } from "http";
 import consola from "consola";
 import nocache from "nocache";
 import SlowDown from "express-slow-down";
+import db from "./db/models";
 import hpp from "hpp";
 import { swaggerClient, swaggerServe } from "./libs/swagger.libs";
 import AuthRoutes from "./routes/auth.route";
@@ -27,8 +28,8 @@ export class App {
     this.env = process.env.NODE_ENV!;
     this.server = http.createServer(this.app);
     this.port = +process.env.PORT!;
-    this.plugins()
-    this.route()
+    this.plugins();
+    this.route();
   }
 
   protected plugins(): void {
