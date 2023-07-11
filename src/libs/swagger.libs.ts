@@ -1,49 +1,30 @@
-import { Express, Request, Response } from "express";
-import swaggerJsdoc from "swagger-jsdoc";
+import { RequestHandler } from "express";
 import swaggerUi from "swagger-ui-express";
-import { version } from "../../package.json";
+import path from "path";
+import fs from "fs";
 
-const options: swaggerJsdoc.Options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Template Express Typescript",
-      description: "Template express typescript buat bikin project, biar gak perlu bikin dari awal lagi",
-      version,
-      contact: {
-        name: "Ayas",
-        email: "ayasyinsanaulia@gmail.com",
-      },
-    },
-    components: {
-      securitySchemas: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-        },
-      },
-    },
-    security: [
-      {
-        bearerAuth: [],
-      },
-    ],
-  },
-  apis: ["./src/routes/*.ts", "./src/schema/*.ts"],
+export const swaggerServe: RequestHandler[] = swaggerUi.serve;
+export const swaggerClient = (): RequestHandler => {
+  let fsResponse: string = '';
+  let swaggerConfig: swaggerUi.JsonObject = {};
+  let env: string = process.env.NODE_ENV!;
+
+  const stagingPath: string = path.resolve(process.cwd(), "dist/openapi.json");
+  const developmentPath: string = path.resolve(process.cwd(), "openapi.json");
+
+  if (env === "development" || env === "staging") {
+    if (env == "development" && fs.existsSync(developmentPath))
+      fsResponse = fs.readFileSync(developmentPath, { encoding: "utf8" });
+    if (env == "staging" && fs.existsSync(stagingPath))
+      fsResponse = fs.readFileSync(stagingPath, { encoding: "utf8" });
+    swaggerConfig = JSON.parse(fsResponse);
+
+    return swaggerUi.setup(swaggerConfig);
+  }
+
+  if (env === "production") {
+    throw new Error("Cannot load swagger file documentation in production");
+  }
+
+  throw new Error("Invalid environment specified");
 };
-
-const swaggerSpec = swaggerJsdoc(options);
-
-function swaggerDocs(app: Express, port: number) {
-  // Swagger page
-  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-  // Docs in JSON format
-  app.get("/docs.json", (req: Request, res: Response) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(swaggerSpec);
-  });
-}
-
-export default swaggerDocs;

@@ -1,0 +1,228 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Template Typescript Express",
+    "description": "Template menggunakan typescript dan express",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000/api/v1"
+    }
+  ],
+  "components": {
+    "securityDefinitions": {
+      "authentication": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+    "paths": {
+      "/auth/register": {
+        "post": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Request users register from server",
+          "description": "Register new users account before login into application",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "register": {
+                    "value": {
+                      "email": "example.gmail.com",
+                      "password": "example123"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "stat_code": {
+                        "type": "number",
+                        "format": "integer",
+                        "example": 200
+                      },
+                      "stat_message": {
+                        "type": "string",
+                        "example": "Create new account success"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "stat_code": {
+                        "type": "number",
+                        "format": "integer",
+                        "example": 400
+                      },
+                      "stat_message": {
+                        "type": "string",
+                        "example": "Email already taken"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "403": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "stat_code": {
+                        "type": "number",
+                        "format": "integer",
+                        "example": 403
+                      },
+                      "stat_message": {
+                        "type": "string",
+                        "example": "Create new account failed"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": ["Authentication"],
+          "summary": "Request users login from server",
+          "description":"Login for users using email and password after register success",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "login": {
+                    "value": {
+                      "email": "example.gmail.com",
+                      "password": "example123"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "statusCode": {
+                        "type": "number",
+                        "format": "integer",
+                        "example": 200
+                      },
+                      "statusMessage": {
+                        "type": "string",
+                        "example": "Login success"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "token": {
+                            "type": "string",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjpudWxsLCJpYXQiOjE2ODkwNjg2ODYsImV4cCI6MTY4OTE1NTA4Nn0.2KYEHi4tNpiy8-QQf86d3_CK9hnrQ0ofVoodE8RTiVM"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "oneOf": [
+                      {
+                        "error1": null,
+                        "type": "object",
+                        "properties": {
+                          "stat_code": {
+                            "type": "number",
+                            "format": "integer",
+                            "example": 400
+                          },
+                          "stat_message": {
+                            "type": "string",
+                            "example": "Email is not registered"
+                          }
+                        }
+                      },
+                      {
+                        "error2": null,
+                        "type": "object",
+                        "properties": {
+                          "stat_code": {
+                            "type": "number",
+                            "format": "integer",
+                            "example": 400
+                          },
+                          "stat_message": {
+                            "type": "string",
+                            "example": "Incorect email or password"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
