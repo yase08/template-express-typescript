@@ -1,10 +1,9 @@
 import {
-  INTERNAL_SERVER_ERROR,
   StatusCodes as status,
 } from "http-status-codes";
 import { apiResponse } from "../helpers/apiResponse.helper";
 import { Request, Response } from "express";
-import { comparePassword, hashPassword } from "../libs/bcrypt.libs";
+import { comparePassword, hashPassword } from "../libs/bcrypt.lib";
 import jwt from "jsonwebtoken";
 
 const jwtSecret = process.env.JWT_SECRET as string;

@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
 import fs from "fs";
+import { ExpressError } from "../helpers/error.helper";
 
 export const swaggerServe: RequestHandler[] = swaggerUi.serve;
 export const swaggerClient = (): RequestHandler => {
@@ -23,8 +24,8 @@ export const swaggerClient = (): RequestHandler => {
   }
 
   if (env === "production") {
-    throw new Error("Cannot load swagger file documentation in production");
+    throw new ExpressError("Cannot load swagger file documentation in production");
   }
 
-  throw new Error("Invalid environment specified");
+  throw new ExpressError("Invalid environment specified");
 };

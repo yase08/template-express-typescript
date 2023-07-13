@@ -1,4 +1,5 @@
 import { createTransport, Transporter, SentMessageInfo } from "nodemailer";
+import { ExpressError } from "../helpers/error.helper";
 
 export const sendMailer = async (
   to: string,
@@ -18,13 +19,17 @@ export const sendMailer = async (
 
     mailer.verify((error: any) => {
       if (error) {
-        return Promise.reject();
+        return Promise.reject(
+          new ExpressError(`Sending email error: ${error}`)
+        );
       }
     });
 
     mailer.on("error", (error) => {
       if (error) {
-        return Promise.reject();
+        return Promise.reject(
+          new ExpressError(`Sending email error: ${error}`)
+        );
       }
     });
 
@@ -38,6 +43,6 @@ export const sendMailer = async (
 
     return true;
   } catch (error) {
-    return Promise.reject();
+    return Promise.reject(new ExpressError(`Sending email error: ${error}`));
   }
 };

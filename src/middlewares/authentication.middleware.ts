@@ -1,7 +1,7 @@
 import { Handler, NextFunction, Request, Response } from "express";
 import { OutgoingMessage } from "http";
 import { JwtPayload } from "jsonwebtoken";
-import { verifyToken } from "../libs/jwt.libs";
+import { verifyToken } from "../libs/jwt.lib";
 import { Session } from "express-session";
 
 interface ISession extends Session {
