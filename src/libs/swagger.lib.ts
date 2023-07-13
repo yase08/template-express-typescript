@@ -4,6 +4,8 @@ import path from "path";
 import fs from "fs";
 import { ExpressError } from "@helpers/error.helper";
 
+// Berfungsi untuk membuat dokumentasi menggunakan swagger
+
 export const swaggerServe: RequestHandler[] = swaggerUi.serve;
 export const swaggerClient = (): RequestHandler => {
   let fsResponse: string = '';

@@ -1,3 +1,5 @@
+// Berfungsi untuk menentukan ketentuan validasi
+
 import {
   IsNotEmpty,
   IsEmail,

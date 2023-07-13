@@ -3,6 +3,7 @@ import { AuthController } from "@controllers/auth.controller";
 import { DTOLogin, DTORegister } from "@/dto/auth.dto";
 import { validator } from "@middlewares/validator.middleware";
 
+// class RouteUsers mengextends dari AuthController agar bisa memakai semua property dan method dari auth controller
 class RouteUsers extends AuthController {
   private router: Router;
 

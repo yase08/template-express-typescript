@@ -1,3 +1,5 @@
+// Berfungsi untuk menangani pesan error
+
 export class ExpressError extends Error {
   public name: string;
   public message: string = "";

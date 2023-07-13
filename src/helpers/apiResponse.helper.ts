@@ -1,3 +1,5 @@
+// Berfungsi untuk menangani response api
+
 export interface APIResponse {
   statusCode: number;
   statusMessage: string;

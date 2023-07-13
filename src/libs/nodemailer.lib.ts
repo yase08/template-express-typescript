@@ -1,6 +1,8 @@
 import { createTransport, Transporter, SentMessageInfo } from "nodemailer";
 import { ExpressError } from "@helpers/error.helper";
 
+// Berfungsi untuk mengirimkan email
+
 export const sendMailer = async (
   to: string,
   subject: string,

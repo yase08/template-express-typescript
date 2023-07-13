@@ -15,6 +15,7 @@ import session from "express-session";
 import { swaggerClient, swaggerServe } from "@libs/swagger.lib";
 import AuthRoutes from "@routes/auth.route";
 
+// Membuat class App yang yang berfungsi sebagai server express
 export class App {
   public app: Express;
   protected version: string;
@@ -32,6 +33,7 @@ export class App {
     this.route();
   }
 
+  // Digunakan untuk mengatur middleware express
   protected plugins(): void {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
@@ -74,10 +76,13 @@ export class App {
       })
     );
   }
+
+  // Digunakan untuk memanggil route
   protected route(): void {
     this.app.use(`${this.version}/auth`, AuthRoutes);
   }
 
+  // Digunakan untuk menjalankan server express
   protected async run(): Promise<void> {
     if (this.env != "production") {
       this.server.listen(this.port, () =>

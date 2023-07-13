@@ -10,6 +10,8 @@ interface ISession extends Session {
 
 const db = require("@db/models");
 
+// Middleware yang berfungsi handle autentikasi
+
 export const auth = (): Handler => {
   return async function (
     req: Request,

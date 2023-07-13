@@ -4,6 +4,8 @@ import multer, { FileFilterCallback } from "multer";
 import { ExpressError } from "@helpers/error.helper";
 import { extensionSupport } from "@helpers/extension.helper";
 
+// Berfungsi untuk mengupload file
+
 export const upload = multer({
   storage: multer.diskStorage({
     destination(_: Request, file: Express.Multer.File, done: any) {

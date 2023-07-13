@@ -6,6 +6,8 @@ import { Request, Response } from "express";
 import { comparePassword, hashPassword } from "@libs/bcrypt.lib";
 import jwt from "jsonwebtoken";
 
+// Berfungsi untuk menghandle logic dari controler
+
 const jwtSecret = process.env.JWT_SECRET as string;
 const db = require("@db/models");
 

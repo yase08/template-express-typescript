@@ -3,13 +3,15 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import { faker } from "@faker-js/faker";
 import { Express } from "express";
-import { App } from "@server";
+import { App } from "../server";
+
+// Berfungsi untuk testing api
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe("Testing - auth", () => {
-  let app: Express;  
+  let app: Express;
 
   before(() => {
     app = new App().app;
@@ -73,7 +75,7 @@ describe("Testing - auth", () => {
         expect(res.body.statusMessage).to.be.equal(
           "Create new account success"
         );
-        done()
+        done();
       });
   });
 });
