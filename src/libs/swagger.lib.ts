@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
 import fs from "fs";
-import { ExpressError } from "../helpers/error.helper";
+import { ExpressError } from "@helpers/error.helper";
 
 export const swaggerServe: RequestHandler[] = swaggerUi.serve;
 export const swaggerClient = (): RequestHandler => {

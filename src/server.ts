@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import "dotenv/config";
 import bodyParser from "body-parser";
 import morgan from "morgan";
@@ -12,8 +12,8 @@ import nocache from "nocache";
 import SlowDown from "express-slow-down";
 import hpp from "hpp";
 import session from "express-session";
-import { swaggerClient, swaggerServe } from "./libs/swagger.lib";
-import AuthRoutes from "./routes/auth.route";
+import { swaggerClient, swaggerServe } from "@libs/swagger.lib";
+import AuthRoutes from "@routes/auth.route";
 
 export class App {
   public app: Express;

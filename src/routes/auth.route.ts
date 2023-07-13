@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { AuthController } from "../controllers/auth.controller";
+import { AuthController } from "@controllers/auth.controller";
+import { DTOLogin, DTORegister } from "@/dto/auth.dto";
+import { validator } from "@middlewares/validator.middleware";
 
 class RouteUsers extends AuthController {
   private router: Router;
@@ -10,8 +12,8 @@ class RouteUsers extends AuthController {
   }
 
   routes(): Router {
-    this.router.post("/register", this.register);
-    this.router.post("/login", this.login);
+    this.router.post("/register", [validator(DTORegister)], this.register);
+    this.router.post("/login", [validator(DTOLogin)], this.login);
 
     return this.router;
   }

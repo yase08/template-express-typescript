@@ -3,7 +3,7 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import { faker } from "@faker-js/faker";
 import { Express } from "express";
-import { App } from "../server";
+import { App } from "@server";
 
 chai.use(chaiHttp);
 const expect = chai.expect;

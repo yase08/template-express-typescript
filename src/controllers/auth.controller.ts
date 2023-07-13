@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { AuthService } from "../services/auth.service";
-import { APIResponse } from "../helpers/apiResponse.helper";
+import { AuthService } from "@services/auth.service";
+import { APIResponse } from "@helpers/apiResponse.helper";
 
 export class AuthController extends AuthService {
   register = async (req: Request, res: Response): Promise<Response> => {

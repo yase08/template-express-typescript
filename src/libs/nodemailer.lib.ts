@@ -1,5 +1,5 @@
 import { createTransport, Transporter, SentMessageInfo } from "nodemailer";
-import { ExpressError } from "../helpers/error.helper";
+import { ExpressError } from "@helpers/error.helper";
 
 export const sendMailer = async (
   to: string,

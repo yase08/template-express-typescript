@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ExpressError } from "../helpers/error.helper";
+import { ExpressError } from "@helpers/error.helper";
 
 const secretKey: string = process.env.SECRET_KEY || "";
 

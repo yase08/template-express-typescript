@@ -1,8 +1,8 @@
 import fs from "fs";
 import { Request } from "express";
 import multer, { FileFilterCallback } from "multer";
-import { ExpressError } from "../helpers/error.helper";
-import { extensionSupport } from "../helpers/extension.helper";
+import { ExpressError } from "@helpers/error.helper";
+import { extensionSupport } from "@helpers/extension.helper";
 
 export const upload = multer({
   storage: multer.diskStorage({

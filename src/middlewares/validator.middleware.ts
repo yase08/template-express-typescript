@@ -3,7 +3,7 @@ import { ClassConstructor, plainToClass } from "class-transformer";
 import { StatusCodes as status } from "http-status-codes";
 import { Request, Response, NextFunction, Handler } from "express";
 import { OutgoingMessage } from "http";
-import { apiResponse } from "../helpers/apiResponse.helper";
+import { apiResponse } from "@helpers/apiResponse.helper";
 
 export function validator(MetaType: ClassConstructor<any>): Handler {
   return async function (

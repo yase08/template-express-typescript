@@ -1,14 +1,14 @@
 import { Handler, NextFunction, Request, Response } from "express";
 import { OutgoingMessage } from "http";
 import { JwtPayload } from "jsonwebtoken";
-import { verifyToken } from "../libs/jwt.lib";
+import { verifyToken } from "@libs/jwt.lib";
 import { Session } from "express-session";
 
 interface ISession extends Session {
   user: any;
 }
 
-const db = require("../db/models");
+const db = require("@db/models");
 
 export const auth = (): Handler => {
   return async function (

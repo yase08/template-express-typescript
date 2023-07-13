@@ -1,13 +1,13 @@
 import {
   StatusCodes as status,
 } from "http-status-codes";
-import { apiResponse } from "../helpers/apiResponse.helper";
+import { apiResponse } from "@helpers/apiResponse.helper";
 import { Request, Response } from "express";
-import { comparePassword, hashPassword } from "../libs/bcrypt.lib";
+import { comparePassword, hashPassword } from "@libs/bcrypt.lib";
 import jwt from "jsonwebtoken";
 
 const jwtSecret = process.env.JWT_SECRET as string;
-const db = require("../db/models");
+const db = require("@db/models");
 
 export class AuthService {
   async registerService(req: Request): Promise<any> {
